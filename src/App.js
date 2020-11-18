@@ -4,7 +4,7 @@ import FolderList from './Components/FolderList'
 import NoteListNav from './Components/NoteListNav'
 import Store from './Components/Store'
 import Note from './Components/Note'
-// import InsideFolder from './Components/InsideFolder'
+import InsideFolder from './Components/InsideFolder'
 import { findNote, folderFinder, getNotesForFolder } from './helpers'
 
 class App extends React.Component {
@@ -21,37 +21,25 @@ class App extends React.Component {
     return (
       <>
         {['/', '/folder/:folderId'].map((path) => (
-          <>
-            <Route
-              exact
-              key={path}
-              path={path}
-              render={(routeProps) => {
-                const { folderId } = routeProps.match.params
-                const notesForFolder = getNotesForFolder(notes, folderId)
-                console.log(notesForFolder)
-                return (
-                  <div>
-                    <FolderList
-                      folders={folders}
-                      notes={notes}
-                      {...routeProps}
-                    />
-                    <NoteListNav {...routeProps} notes={notesForFolder} />
-                  </div>
-                )
-              }}
-            />
-            <Route
-              path='/note/:noteId'
-              render={(routeProps) => {
-                const { noteId } = routeProps.match.params
-                const note = findNote(notes, noteId)
-                return <Note {...routeProps} note={note} />
-              }}
-            />
-          </>
+          <Route
+            exact
+            key={path}
+            path={path}
+            render={(routeProps) => {
+              const { folderId } = routeProps.match.params
+              const notesForFolder = getNotesForFolder(notes, folderId)
+              console.log(notesForFolder)
+              return (
+                <div>
+                  <FolderList folders={folders} notes={notes} {...routeProps} />
+                </div>
+              )
+            }}
+          />
         ))}
+        <Route path='/note/:noteId'>
+          <InsideFolder folders={folders} notes={notes} />
+        </Route>
         <Route path='/add-folder' />
         <Route path='/add-note' />
       </>
@@ -62,17 +50,27 @@ class App extends React.Component {
     return (
       <>
         {['/', '/folder/:folderId'].map((path) => {
-          ;<Route
-            exact
-            key={path}
-            path={path}
-            render={(routeProps) => {
-              const { folderId } = routeProps.match.params
-              const notesForFolder = getNotesForFolder(notes, folderId)
-              return <NoteListNav {...routeProps} notes={notesForFolder} />
-            }}
-          />
+          return (
+            <Route
+              exact
+              key={path}
+              path={path}
+              render={(routeProps) => {
+                const { folderId } = routeProps.match.params
+                const notesForFolder = getNotesForFolder(notes, folderId)
+                return <NoteListNav {...routeProps} notes={notesForFolder} />
+              }}
+            />
+          )
         })}
+        <Route
+          path='/note/:noteId'
+          render={(routeProps) => {
+            const { noteId } = routeProps.match.params
+            const note = findNote(notes, noteId)
+            return <Note {...routeProps} note={note} />
+          }}
+        />
       </>
     )
   }
