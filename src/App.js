@@ -21,22 +21,36 @@ class App extends React.Component {
     return (
       <>
         {['/', '/folder/:folderId'].map((path) => (
-          <Route
-            exact
-            key={path}
-            path={path}
-            render={(routeProps) => {
-              const { folderId } = routeProps.match.params
-              const notesForFolder = getNotesForFolder(notes, folderId)
-              console.log(notesForFolder)
-              return (
-                <div>
-                  <FolderList folders={folders} notes={notes} {...routeProps} />
-                  <NoteListNav {...routeProps} notes={notesForFolder} />
-                </div>
-              )
-            }}
-          />
+          <>
+            <Route
+              exact
+              key={path}
+              path={path}
+              render={(routeProps) => {
+                const { folderId } = routeProps.match.params
+                const notesForFolder = getNotesForFolder(notes, folderId)
+                console.log(notesForFolder)
+                return (
+                  <div>
+                    <FolderList
+                      folders={folders}
+                      notes={notes}
+                      {...routeProps}
+                    />
+                    <NoteListNav {...routeProps} notes={notesForFolder} />
+                  </div>
+                )
+              }}
+            />
+            <Route
+              path='/note/:noteId'
+              render={(routeProps) => {
+                const { noteId } = routeProps.match.params
+                const note = findNote(notes, noteId)
+                return <Note {...routeProps} note={note} />
+              }}
+            />
+          </>
         ))}
         <Route path='/add-folder' />
         <Route path='/add-note' />
@@ -59,14 +73,6 @@ class App extends React.Component {
             }}
           />
         })}
-        <Route
-          path='/note/:noteId'
-          render={(routeProps) => {
-            const { noteId } = routeProps.match.params
-            const note = findNote(notes, noteId)
-            return <Note {...routeProps} note={note} />
-          }}
-        />
       </>
     )
   }
