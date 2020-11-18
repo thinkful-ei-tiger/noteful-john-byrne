@@ -6,7 +6,9 @@ export default function FolderList(props) {
     <div>
       <ul className='nav-list'>
         {props.folders.map((folder) => (
-          <li key={folder.id}>{folder.name}</li>
+          <li key={folder.id}>
+            <Link to={`/folder/${folder.id}`}>{folder.name}</Link>
+          </li>
         ))}
       </ul>
       <div className='add-folder'>

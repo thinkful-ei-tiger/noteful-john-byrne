@@ -2,6 +2,7 @@ import React from 'react'
 import NoteCard from './NoteCard'
 
 export default function NoteListNav(props) {
+  console.log(props)
   return (
     <div className='note-list'>
       <ul className='note-list'>

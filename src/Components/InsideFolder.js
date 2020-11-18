@@ -1,11 +1,11 @@
 import React from 'react'
 import FolderList from './FolderList'
 
-export default function InsideFolder() {
+export default function InsideFolder(props) {
   return (
     <div>
-      <button>Go Back</button>
       <h2>{folder.name}</h2>
+      <button>Go Back</button>
     </div>
   )
 }

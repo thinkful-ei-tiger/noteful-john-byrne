@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
-import Header from './Components/Header'
 import FolderList from './Components/FolderList'
 import NoteListNav from './Components/NoteListNav'
 import Store from './Components/Store'
+import Note from './Components/Note'
+// import InsideFolder from './Components/InsideFolder'
 import { findNote, folderFinder, getNotesForFolder } from './helpers'
 
 class App extends React.Component {
@@ -24,23 +25,21 @@ class App extends React.Component {
             exact
             key={path}
             path={path}
-            render={(routeProps) => (
-              <FolderList folders={folders} notes={notes} {...routeProps} />
-            )}
+            render={(routeProps) => {
+              const { folderId } = routeProps.match.params
+              const notesForFolder = getNotesForFolder(notes, folderId)
+              console.log(notesForFolder)
+              return (
+                <div>
+                  <FolderList folders={folders} notes={notes} {...routeProps} />
+                  <NoteListNav {...routeProps} notes={notesForFolder} />
+                </div>
+              )
+            }}
           />
         ))}
-        <Route
-          path='/note/:noteId'
-          render={(routeProps) => {
-            const { noteId } = routeProps.match.params
-            const note = findNote(notes, noteId) || {}
-            console.log(note)
-            const folder = folderFinder(folders, note.folderId)
-            return <FolderList {...routeProps} folder={folder} />
-          }}
-        />
-        <Route path='/add-folder' component={FolderList} />
-        <Route path='/add-note' component={FolderList} />
+        <Route path='/add-folder' />
+        <Route path='/add-note' />
       </>
     )
   }
@@ -65,7 +64,7 @@ class App extends React.Component {
           render={(routeProps) => {
             const { noteId } = routeProps.match.params
             const note = findNote(notes, noteId)
-            return <NoteListNav {...routeProps} note={note} />
+            return <Note {...routeProps} note={note} />
           }}
         />
       </>
@@ -74,12 +73,12 @@ class App extends React.Component {
   render() {
     return (
       <div className='App'>
-        <nav className='App__nav'>{this.renderNavRoutes()}</nav>
         <header className='App__header'>
           <h1>
             <Link to='/'>Noteful</Link>{' '}
           </h1>
         </header>
+        <nav className='App__nav'>{this.renderNavRoutes()}</nav>
         <main className='App__main'>{this.renderMainRoutes()}</main>
       </div>
     )
