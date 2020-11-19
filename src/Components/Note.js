@@ -10,9 +10,8 @@ export default class Note extends React.Component {
 
   handleClickDelete = (event) => {
     event.preventDefault()
-    const noteId = this.props.id
-
-    fetch(`${config.API_Endpoint}/notes/${noteId}`, {
+    const noteId = this.props.match.params.noteId
+    fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
@@ -29,6 +28,7 @@ export default class Note extends React.Component {
       .catch((error) => {
         console.error({ error })
       })
+    this.props.history.push('/')
   }
 
   render() {
