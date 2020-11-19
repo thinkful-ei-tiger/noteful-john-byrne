@@ -1,14 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import ApiContext from './ApiContext'
 
-export default function NoteCard(props) {
-  return (
-    <div className='note-card'>
-      <h2>
-        <Link to={`/note/${props.note.id}`}>{props.note.name}</Link>
-      </h2>
-      <span>Date modified: {props.note.modified}</span>
-      <button>Delete Note</button>
-    </div>
-  )
+export default class NoteCard extends React.Component {
+  render() {
+    const { id, name, modified } = this.props
+    return (
+      <div className='note-card'>
+        <h2>
+          <Link to={`/note/${id}`}>{name}</Link>
+        </h2>
+        <span>Date modified: {modified}</span>
+      </div>
+    )
+  }
 }

@@ -8,3 +8,6 @@ export const folderFinder = (folders = [], folderId) => {
 
 export const getNotesForFolder = (notes = [], folderId) =>
   !folderId ? notes : notes.filter((note) => note.folderId === folderId)
+
+export const countNotesForFolders = (notes = [], folderId) =>
+  notes.filter((note) => note.folderId === folderId).length

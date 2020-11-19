@@ -1,19 +1,28 @@
 import React from 'react'
-import FolderList from './FolderList'
-import { useHistory, useParams } from 'react-router-dom'
+import ApiContext from './ApiContext'
+import { findNote, folderFinder } from '../helpers/helper-functions'
 
-export default function InsideFolder(props) {
-  const history = useHistory()
-  const params = useParams()
-  const note = props.notes.find((note) => params.noteId === note.id)
-  const currentFolder = props.folders.find(
-    (folder) => note.folderId === folder.id
-  )
-  console.log(currentFolder)
-  return (
-    <div>
-      <h2>{currentFolder.name}</h2>
-      <button onClick={() => history.goBack()}>Go Back</button>
-    </div>
-  )
+export default class InsideFolder extends React.Component {
+  static defaultProps = {
+    history: {
+      goBack: () => {},
+    },
+    match: {
+      params: {},
+    },
+  }
+  static contextType = ApiContext
+
+  render() {
+    const { notes, folders } = this.context
+    const { noteId } = this.props.match.params
+    const note = findNote(notes, noteId) || {}
+    const folder = folderFinder(folders, note.folderId) || {}
+    return (
+      <div>
+        <h2>{folder.name}</h2>
+        <button onClick={() => this.props.history.goBack()}>Go Back</button>
+      </div>
+    )
+  }
 }

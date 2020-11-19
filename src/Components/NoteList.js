@@ -11,13 +11,10 @@ export default class NoteListNav extends React.Component {
   static contextType = ApiContext
   render() {
     const { notes = [] } = this.context
-    const noteForFolder = notes.filter(
-      (note) => note.folderId === this.props.match.params.folderId
-    )
     return (
       <div className='note-list'>
         <ul className='note-list'>
-          {noteForFolder.map((note) => (
+          {notes.map((note) => (
             <li key={note.id}>
               {
                 <NoteCard
