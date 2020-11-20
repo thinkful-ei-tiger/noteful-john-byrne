@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import NoteCard from './NoteCard'
 import ApiContext from './ApiContext'
 
@@ -27,7 +28,9 @@ export default class NoteListNav extends React.Component {
           ))}
         </ul>
         <div className='add-note'>
-          <button>Add Note</button>
+          <Link to='/add-note'>
+            <button>Add Note</button>
+          </Link>
         </div>
       </div>
     )

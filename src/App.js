@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
 import FolderList from './Components/FolderList'
-import NoteListNav from './Components/NoteListNav'
+import NoteNav from './Components/NoteNav'
 import NoteList from './Components/NoteList'
 import Note from './Components/Note'
 import InsideFolder from './Components/InsideFolder'
 import ApiContext from './Components/ApiContext'
 import config from './Components/config'
+import AddNote from './Components/AddNote'
+import AddFolder from './Components/AddFolder'
 
 class App extends React.Component {
   state = {
@@ -37,6 +39,11 @@ class App extends React.Component {
       notes: this.state.notes.filter((note) => note.id !== noteId),
     })
   }
+  onAddFolder = (newFolder) => {
+    this.setState({
+      folders: [...this.state.folders, newFolder],
+    })
+  }
 
   renderNavRoutes() {
     return (
@@ -45,8 +52,8 @@ class App extends React.Component {
           <Route exact key={path} path={path} component={FolderList} />
         ))}
         <Route path='/note/:noteId' component={InsideFolder} />
-        <Route path='/add-folder' component={InsideFolder} />
-        <Route path='/add-note' component={InsideFolder} />
+        <Route path='/add-folder' component={AddFolder} />
+        <Route path='/add-note' component={AddNote} />
       </>
     )
   }
@@ -54,16 +61,18 @@ class App extends React.Component {
     return (
       <>
         <Route exact path={'/'} component={NoteList} />
-        <Route exact path={'/folder/:folderId'} component={NoteListNav} />
+        <Route exact path={'/folder/:folderId'} component={NoteNav} />
         <Route path='/note/:noteId' component={Note} />
       </>
     )
   }
   render() {
+    console.log('Test')
     const value = {
       notes: this.state.notes,
       folders: this.state.folders,
       deleteNote: this.handleDeleteNote,
+      onAddFolder: this.onAddFolder,
     }
     return (
       <ApiContext.Provider value={value}>

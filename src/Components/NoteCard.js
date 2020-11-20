@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import ApiContext from './ApiContext'
 
+//NEEDS TO BE REFACTORED TO INCLUDE PROPTYPES//
+
 export default class NoteCard extends React.Component {
   render() {
     const { id, name, modified } = this.props

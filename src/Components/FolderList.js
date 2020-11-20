@@ -17,7 +17,9 @@ export default class FolderList extends React.Component {
           ))}
         </ul>
         <div className='add-folder'>
-          <button>Add Folder</button>
+          <Link to='/add-folder'>
+            <button>Add Folder</button>
+          </Link>
         </div>
       </div>
     )
