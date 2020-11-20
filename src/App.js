@@ -44,6 +44,11 @@ class App extends React.Component {
       folders: [...this.state.folders, newFolder],
     })
   }
+  onAddNote = (newNote) => {
+    this.setState({
+      notes: [...this.state.notes, newNote],
+    })
+  }
 
   renderNavRoutes() {
     return (
