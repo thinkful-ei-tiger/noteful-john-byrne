@@ -1,0 +1,11 @@
+header {
+  text-align: center;
+  background-color: indigo;
+  padding: 2px;
+}
+
+h1 a {
+  color: white;
+  text-decoration: none;
+  font-family: 'Staatliches', cursive;
+}

@@ -1,0 +1,5 @@
+.note-list li {
+  float: right;
+  display: table-column;
+  text-decoration: none;
+}

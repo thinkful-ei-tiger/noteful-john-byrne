@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ApiContext from './ApiContext'
 import config from './config'
+import './AddFolder.css'
 
 export default class AddFolder extends Component {
   static defaultProps = {
@@ -29,6 +30,7 @@ export default class AddFolder extends Component {
   render() {
     return (
       <section className='add-folder'>
+        <h2>Add New Folder</h2>
         <form onSubmit={this.handleAddFolder}>
           <input
             type='text'

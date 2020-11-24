@@ -1,6 +1,7 @@
 import React from 'react'
 import ApiContext from './ApiContext'
 import config from './config'
+import './Note.css'
 
 export default class Note extends React.Component {
   static defaultProps = {

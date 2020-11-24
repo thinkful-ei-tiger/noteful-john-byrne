@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import NoteCard from './NoteCard'
 import ApiContext from './ApiContext'
+import './NoteList.css'
 
 export default class NoteListNav extends React.Component {
   static defaultProps = {
@@ -13,7 +14,7 @@ export default class NoteListNav extends React.Component {
   render() {
     const { notes = [] } = this.context
     return (
-      <div className='note-list'>
+      <div className='notes-home'>
         <ul className='note-list'>
           {notes.map((note) => (
             <li key={note.id}>
@@ -27,11 +28,6 @@ export default class NoteListNav extends React.Component {
             </li>
           ))}
         </ul>
-        <div className='add-note'>
-          <Link to='/add-note'>
-            <button>Add Note</button>
-          </Link>
-        </div>
       </div>
     )
   }

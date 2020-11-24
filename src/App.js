@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Route, Link } from 'react-router-dom'
 import FolderList from './Components/FolderList'
 import NoteNav from './Components/NoteNav'
@@ -9,6 +9,8 @@ import ApiContext from './Components/ApiContext'
 import config from './Components/config'
 import AddNote from './Components/AddNote'
 import AddFolder from './Components/AddFolder'
+import './App.css'
+import ErrorBoundry from './Components/ErrorBoundary'
 
 class App extends React.Component {
   state = {
@@ -78,6 +80,7 @@ class App extends React.Component {
       folders: this.state.folders,
       deleteNote: this.handleDeleteNote,
       onAddFolder: this.onAddFolder,
+      onAddNote: this.onAddNote,
     }
     return (
       <ApiContext.Provider value={value}>
@@ -87,8 +90,12 @@ class App extends React.Component {
               <Link to='/'>Noteful</Link>{' '}
             </h1>
           </header>
-          <nav className='App__nav'>{this.renderNavRoutes()}</nav>
-          <main className='App__main'>{this.renderMainRoutes()}</main>
+          <ErrorBoundry>
+            <nav className='App__nav'>{this.renderNavRoutes()}</nav>
+          </ErrorBoundry>
+          <ErrorBoundry>
+            <main className='App__main'>{this.renderMainRoutes()}</main>
+          </ErrorBoundry>
         </div>
       </ApiContext.Provider>
     )

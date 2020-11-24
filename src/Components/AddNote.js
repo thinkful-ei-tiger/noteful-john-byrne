@@ -14,11 +14,12 @@ export default class AddNote extends React.Component {
       name: event.target.noteName.value,
       content: event.target.noteContent.value,
       folderId: event.target.folderName.value,
+      modified: new Date().toISOString(),
     }
     fetch(`${config.API_ENDPOINT}/notes`, {
       method: 'POST',
       headers: {
-        'content-type': 'application',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(newNote),
     })
@@ -33,7 +34,8 @@ export default class AddNote extends React.Component {
   render() {
     return (
       <section className='add-note'>
-        <form onSubmit={this.handleAddFolder}>
+        <h2>Add New Note</h2>
+        <form onSubmit={this.handleAddNote}>
           <input
             type='text'
             name='noteName'
