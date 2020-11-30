@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import ApiContext from './ApiContext'
 import { findNote, folderFinder } from '../helpers/helper-functions'
 import './InsideFolder.css'
@@ -26,4 +27,8 @@ export default class InsideFolder extends React.Component {
       </div>
     )
   }
+}
+InsideFolder.propTypes = {
+  match: PropTypes.shape({ params: PropTypes.object }),
+  history: PropTypes.shape({ goBack: PropTypes.func }),
 }

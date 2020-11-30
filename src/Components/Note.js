@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import ApiContext from './ApiContext'
 import config from './config'
 import './Note.css'
@@ -51,4 +52,10 @@ export default class Note extends React.Component {
       </div>
     )
   }
+}
+Note.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({ noteId: PropTypes.string }),
+  }),
+  history: PropTypes.shape({ push: PropTypes.func }),
 }

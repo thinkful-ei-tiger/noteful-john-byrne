@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import './NoteCard.css'
 
-//NEEDS TO BE REFACTORED TO INCLUDE PROPTYPES//
-
 export default class NoteCard extends React.Component {
   render() {
     const { id, name, modified } = this.props

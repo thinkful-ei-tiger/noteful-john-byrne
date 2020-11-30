@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import ApiContext from './ApiContext'
 import config from './config'
 import './AddFolder.css'
@@ -44,4 +45,8 @@ export default class AddFolder extends Component {
       </section>
     )
   }
+}
+
+AddFolder.propTypes = {
+  history: PropTypes.shape({ push: PropTypes.func }),
 }

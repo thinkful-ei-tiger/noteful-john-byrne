@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import NoteCard from './NoteCard'
 import ApiContext from './ApiContext'
@@ -41,4 +42,9 @@ export default class NoteListNav extends React.Component {
       </>
     )
   }
+}
+NoteListNav.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({ folderId: PropTypes.string }),
+  }),
 }

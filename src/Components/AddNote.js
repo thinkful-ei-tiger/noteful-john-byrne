@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import ApiContext from './ApiContext'
 import config from './config'
 
@@ -66,4 +67,7 @@ export default class AddNote extends React.Component {
       </section>
     )
   }
+}
+AddNote.propTypes = {
+  history: PropTypes.shape({ push: PropTypes.func }),
 }
