@@ -18,7 +18,7 @@ export default class NoteCard extends React.Component {
 }
 
 NoteCard.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.number,
   name: PropTypes.string,
   modified: PropTypes.string,
 }

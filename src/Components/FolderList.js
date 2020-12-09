@@ -14,7 +14,7 @@ export default class FolderList extends React.Component {
           <h2>Folders</h2>
           {folders.map((folder) => (
             <li key={folder.id}>
-              <Link to={`/folder/${folder.id}`}>{folder.name}</Link>
+              <Link to={`/folder/${folder.id}`}>{folder.title}</Link>
             </li>
           ))}
         </ul>

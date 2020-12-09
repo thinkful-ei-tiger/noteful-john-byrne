@@ -12,7 +12,7 @@ export default class AddFolder extends Component {
 
   handleAddFolder = (event) => {
     event.preventDefault()
-    const newFolder = { name: event.target.folderName.value }
+    const newFolder = { title: event.target.folderTitle.value }
     fetch(`${config.API_ENDPOINT}/folders`, {
       method: 'POST',
       headers: {
@@ -35,7 +35,7 @@ export default class AddFolder extends Component {
         <form onSubmit={this.handleAddFolder}>
           <input
             type='text'
-            name='folderName'
+            name='folderTitle'
             className='folder-entry'
             placeholder='Folder Name'
             required

@@ -5,9 +5,6 @@ import config from './config'
 import './Note.css'
 
 export default class Note extends React.Component {
-  static defaultProps = {
-    onDeleteNote: () => {},
-  }
   static contextType = ApiContext
 
   handleClickDelete = (event) => {
@@ -21,11 +18,7 @@ export default class Note extends React.Component {
     })
       .then((res) => {
         if (!res.ok) return res.json().then((event) => Promise.reject(event))
-        return res.json()
-      })
-      .then(() => {
         this.context.deleteNote(noteId)
-        this.props.onDeleteNote(noteId)
       })
       .catch((error) => {
         console.error({ error })
@@ -36,11 +29,12 @@ export default class Note extends React.Component {
   render() {
     const { notes } = this.context
     const note =
-      notes.find((n) => n.id === this.props.match.params.noteId) || {}
+      notes.find((n) => n.id.toString() === this.props.match.params.noteId) ||
+      {}
     return (
       <div className='note'>
-        <h2>{note.name}</h2>
-        <span>Date modified: {note.modified}</span>
+        <h2>{note.title}</h2>
+        <span>Date modified: {note.date_published}</span>
         <button
           className='delete-note'
           type='button'

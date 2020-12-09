@@ -12,9 +12,9 @@ export default class AddNote extends React.Component {
   handleAddNote = (event) => {
     event.preventDefault()
     const newNote = {
-      name: event.target.noteName.value,
+      title: event.target.noteTitle.value,
       content: event.target.noteContent.value,
-      folderId: event.target.folderName.value,
+      folder: event.target.folderTitle.value,
       modified: new Date().toISOString(),
     }
     fetch(`${config.API_ENDPOINT}/notes`, {
@@ -39,7 +39,7 @@ export default class AddNote extends React.Component {
         <form onSubmit={this.handleAddNote}>
           <input
             type='text'
-            name='noteName'
+            name='noteTitle'
             className='note-entry'
             placeholder='Note Title'
             required
@@ -53,11 +53,11 @@ export default class AddNote extends React.Component {
             required
           />
           <br />
-          <select name='folderName'>
+          <select name='folderTitle'>
             <option value={null}>...</option>
             {this.context.folders.map((folder) => (
               <option value={folder.id} key={folder.id}>
-                {folder.name}
+                {folder.title}
               </option>
             ))}
           </select>

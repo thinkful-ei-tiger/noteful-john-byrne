@@ -20,9 +20,9 @@ export default class NoteListNav extends React.Component {
             <li key={note.id}>
               {
                 <NoteCard
-                  name={note.name}
+                  name={note.title}
                   id={note.id}
-                  modified={note.modified}
+                  modified={note.date_published}
                 />
               }
             </li>

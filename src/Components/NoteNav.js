@@ -15,7 +15,7 @@ export default class NoteListNav extends React.Component {
     console.log('Hello')
     const { notes = [] } = this.context
     const noteForFolder = notes.filter(
-      (note) => note.folderId === this.props.match.params.folderId
+      (note) => note.folder.toString() === this.props.match.params.folderId
     )
     return (
       <>
@@ -25,9 +25,9 @@ export default class NoteListNav extends React.Component {
               <li key={note.id}>
                 {
                   <NoteCard
-                    name={note.name}
+                    name={note.title}
                     id={note.id}
-                    modified={note.modified}
+                    modified={note.date_published}
                   />
                 }
               </li>
